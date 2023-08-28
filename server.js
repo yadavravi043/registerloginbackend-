@@ -3,6 +3,7 @@ const express=require('express')
 const mongoose=require('mongoose')
 const port=process.env.PORT||5000;
 const app=express();
+require('dotenv').config()
 const cors=require('cors')
 const authroutes=require('./routes/auth')
 
@@ -17,9 +18,8 @@ app.use(express.json());
 app.use('/api/auth',authroutes)
 
 
-const db="mongodb+srv://ravi1:mongo123@cluster0.20zl3qv.mongodb.net/myreacttest?retryWrites=true&w=majority"
 mongoose
-.connect(db)
+.connect(process.env.DATABASE_ATLAS)
 .then(()=>console.log("database connected successfully..."))
 .catch((err)=>{
  console.log(err)
