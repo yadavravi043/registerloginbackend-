@@ -3,7 +3,7 @@
  const createJwtToken =require('../utils/createJwtToken')
  module.exports.register = async (req, res, next) => {
     try {
-      const { username, email, password,birthday} = req.body;
+      const { username, email, password,birthday,contactNumber} = req.body;
       const usernameCheck = await User.findOne({ username });
       if (usernameCheck)
         return res.json({ msg: "Username already used", status: false });
@@ -15,6 +15,7 @@
         email,
         username,
         dob:birthday,
+        phone:contactNumber,
         password: hashedPassword,
       });
       delete user.password;
